@@ -1,0 +1,513 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Social</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+    
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+    
+        input,
+        textarea,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            box-sizing: border-box;
+        }
+    
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background: #0056b3;
+        }
+    
+        .usuario,
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    
+        .usuario {
+            background: #fafafa;
+        }
+    
+        .post {
+            background: #f8fbff;
+        }
+    </style>
+    
+    </head> <body>
+    <h1>Minha Rede Social</h1>
+    
+    <!-- =============================== -->
+    <!-- CRIAR USUÁRIO -->
+    <!-- =============================== -->
+    
+    <section>
+    
+        <h2>Criar usuário</h2>
+    
+        <form id="formUsuario">
+    
+            <input
+                id="nome"
+                type="text"
+                placeholder="Nome"
+                required
+            >
+    
+            <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                required
+            >
+    
+            <input
+                id="senha"
+                type="password"
+                placeholder="Senha"
+                required
+            >
+    
+            <input
+                id="cpf"
+                type="text"
+                placeholder="CPF"
+                required
+            >
+    
+            <button type="submit">
+                Cadastrar usuário
+            </button>
+    
+        </form>
+    
+    </section>
+    
+    
+    <!-- =============================== -->
+    <!-- USUÁRIOS CADASTRADOS -->
+    <!-- =============================== -->
+    
+    <section>
+    
+        <h2>Usuários cadastrados</h2>
+    
+        <div id="listaUsuarios"></div>
+    
+    </section>
+    
+    
+    <!-- =============================== -->
+    <!-- CRIAR POST -->
+    <!-- =============================== -->
+    
+    <section>
+    
+        <h2>Criar post</h2>
+    
+        <form id="formPost">
+
+            <input
+                id="titulo"
+                type="text"
+                placeholder="Título"
+                required
+            >
+        
+            <textarea
+                id="texto"
+                placeholder="Texto"
+                required
+            ></textarea>
+        
+            <label for="imagem">
+                Imagem (opcional)
+            </label>
+        
+            <input
+                id="imagem"
+                type="file"
+                accept="image/*"
+            >
+        
+            <select id="autor" required>
+        
+                <option value="">
+                    Selecione um autor
+                </option>
+        
+            </select>
+        
+            <button type="submit">
+                Criar post
+            </button>
+        
+        </form>
+    
+    </section>
+    
+    
+    <!-- =============================== -->
+    <!-- POSTS -->
+    <!-- =============================== -->
+    
+    <section>
+    
+        <h2>Posts</h2>
+    
+        <div id="listaPosts"></div>
+    
+    </section>
+    
+    
+    <!-- =============================== -->
+    <!-- JAVASCRIPT -->
+    <!-- =============================== -->
+    
+    <script type="module">
+    
+        import Servidor from "./Servidor.js";
+    
+    
+        // Criar o servidor
+        const servidor = new Servidor();
+    
+    
+        // =====================================
+        // CADASTRAR USUÁRIO
+        // =====================================
+    
+        const formUsuario =
+            document.getElementById("formUsuario");
+    
+    
+        formUsuario.addEventListener(
+            "submit",
+            function(event) {
+    
+                event.preventDefault();
+    
+    
+                const nome =
+                    document.getElementById("nome").value;
+    
+                const email =
+                    document.getElementById("email").value;
+    
+                const senha =
+                    document.getElementById("senha").value;
+    
+                const cpf =
+                    document.getElementById("cpf").value;
+    
+    
+                // Criar usuário através do servidor
+                const usuario =
+                    servidor.criarUsuario(
+                        nome,
+                        email,
+                        senha,
+                        cpf
+                    );
+    
+    
+                console.log(
+                    "Usuário criado:",
+                    usuario
+                );
+    
+    
+                console.log(
+                    "Todos os usuários:",
+                    servidor.usuarios
+                );
+    
+    
+                // Limpar formulário
+                formUsuario.reset();
+    
+    
+                // Atualizar lista
+                atualizarUsuarios();
+    
+    
+                alert(
+                    "Usuário " +
+                    usuario.nome +
+                    " cadastrado com sucesso!"
+                );
+    
+            }
+        );
+    
+    
+        // =====================================
+        // MOSTRAR USUÁRIOS
+        // =====================================
+    
+        function atualizarUsuarios() {
+    
+            const lista =
+                document.getElementById(
+                    "listaUsuarios"
+                );
+    
+    
+            // Limpar lista
+            lista.innerHTML = "";
+    
+    
+            // Limpar select de autores
+            const selectAutor =
+                document.getElementById("autor");
+    
+    
+            selectAutor.innerHTML =
+                '<option value="">Selecione um autor</option>';
+    
+    
+            // Percorrer usuários
+            servidor.usuarios.forEach(
+                function(usuario, index) {
+    
+    
+                    // Criar div do usuário
+                    const div =
+                        document.createElement("div");
+    
+    
+                    div.className = "usuario";
+    
+    
+                    div.innerHTML =
+                        "<strong>" +
+                        usuario.nome +
+                        "</strong><br>" +
+    
+                        "Email: " +
+                        usuario.email +
+                        "<br>" +
+    
+                        "CPF: " +
+                        usuario.cpf;
+    
+    
+                    lista.appendChild(div);
+    
+    
+                    // Criar opção no select
+                    const option =
+                        document.createElement("option");
+    
+    
+                    option.value = index;
+    
+    
+                    option.textContent =
+                        usuario.nome;
+    
+    
+                    selectAutor.appendChild(option);
+    
+                }
+            );
+    
+        }
+    
+    
+        // =====================================
+        // CRIAR POST
+        // =====================================
+    
+        const formPost =
+            document.getElementById("formPost");
+
+
+        formPost.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const titulo =
+                    document.getElementById("titulo").value;
+
+
+                const texto =
+                    document.getElementById("texto").value;
+
+
+                const autorIndex =
+                    document.getElementById("autor").value;
+
+
+                const arquivoImagem =
+                    document.getElementById("imagem").files[0];
+
+
+                if (autorIndex === "") {
+
+                    alert("Selecione um autor!");
+
+                    return;
+                }
+
+
+                const autor =
+                    servidor.usuarios[autorIndex];
+
+
+                // =====================================
+                // SEM IMAGEM
+                // =====================================
+
+                if (!arquivoImagem) {
+
+                    servidor.criarPost(
+                        titulo,
+                        texto,
+                        autor
+                    );
+
+                    formPost.reset();
+
+                    atualizarPosts();
+
+                    return;
+                }
+
+
+                // =====================================
+                // COM IMAGEM
+                // =====================================
+
+                const leitor =
+                    new FileReader();
+
+
+                leitor.onload = function(event) {
+
+                    const imagem =
+                        event.target.result;
+
+
+                    console.log("Imagem carregada!");
+                    console.log(imagem);
+
+
+                    servidor.criarPost(
+                        titulo,
+                        texto,
+                        autor,
+                        imagem
+                    );
+
+
+                    formPost.reset();
+
+                    atualizarPosts();
+
+                };
+
+
+                leitor.readAsDataURL(arquivoImagem);
+
+            }
+        );
+    
+        // =====================================
+        // MOSTRAR POSTS
+        // =====================================
+    
+        function atualizarPosts() {
+            const lista =
+                document.getElementById("listaPosts");
+
+
+            lista.innerHTML = "";
+
+
+            servidor.posts.forEach(
+                function(post) {
+
+                    const div =
+                        document.createElement("div");
+
+
+                    div.className = "post";
+
+
+                    let conteudoImagem = "";
+
+
+                    if (post.imagem) {
+
+                        conteudoImagem =
+                            `
+                            <img
+                                src="${post.imagem}"
+                                alt="Imagem do post"
+                                style="
+                                    width: 100%;
+                                    max-height: 500px;
+                                    object-fit: contain;
+                                    border-radius: 8px;
+                                    margin-top: 10px;
+                                "
+                            >
+                            `;
+                    }
+
+
+                    div.innerHTML =
+                        `
+                        <h3>
+                            ${post.titulo}
+                        </h3>
+
+                        <p>
+                            ${post.texto}
+                        </p>
+
+                        ${conteudoImagem}
+
+                        <p>
+                            <small>
+                                Autor: ${post.autor.nome}
+                            </small>
+                        </p>
+                        `;
+
+
+                    lista.appendChild(div);
+
+                }
+            );
+            }
+    
+    </script>
+    
+    </body> </html>
