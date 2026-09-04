@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #8b5cf6;
+    --background: #f1f5f9;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f8fafc,
+        #f5f3ff
+    );
+
+    color: var(--text);
+
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+body > h1 {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 35px;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =================================
+   ORGANIZAÇÃO DAS SEÇÕES
+================================= */
+
+body > h1 {
+    grid-column: 1 / -1;
+}
+
+
+section {
+    background: rgba(255, 255, 255, 0.95);
+
+    padding: 28px;
+    margin-bottom: 24px;
+
+    border-radius: 18px;
+    border: 1px solid var(--border);
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+    transition: 0.2s;
+}
+
+section:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.12);
+}
+
+section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+section h2::before {
+    content: "";
+
+    width: 5px;
+    height: 24px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        var(--primary),
+        var(--secondary)
+    );
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin: 5px 0 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: white;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--text-light);
+
+    margin-top: 5px;
+}
+
+button {
+    width: 100%;
+
+    padding: 14px 18px;
+
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(99, 102, 241, 0.25);
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.35);
+}
+
+.usuario {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f8fafc
+    );
+
+    border: 1px solid var(--border);
+
+    padding: 18px;
+    margin-top: 12px;
+
+    border-radius: 14px;
+
+    transition: 0.2s;
+}
+
+.usuario:hover {
+    transform: translateX(4px);
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.usuario strong {
+    display: inline-block;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+
+    color: var(--primary-dark);
+}
+
+.post {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    padding: 22px;
+    margin-top: 16px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.05);
+
+    transition: 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+.post h3 {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.post p {
+    color: #475569;
+
+    line-height: 1.7;
+
+    margin-bottom: 12px;
+}
+
+.post small {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.post img {
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    margin-top: 10px;
+
+    background: #f8fafc;
+
+    border: 1px solid var(--border);
+}
+
+input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+    background: white;
+}
+
+input[type="file"]::file-selector-button {
+    border: none;
+
+    background: #eef2ff;
+
+    color: var(--primary-dark);
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    body > h1 {
+        font-size: 32px;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    section h2 {
+        font-size: 19px;
+    }
+
+    .post {
+        padding: 18px;
+    }
+}
+
+/* =================================
+   SEÇÕES PRINCIPAIS
+================================= */
+
+#usuarios-section,
+#posts-section {
+    margin-bottom: 30px;
+}
+
+
+/* =================================
+   SUBSEÇÕES
+================================= */
+
+.criar-usuario,
+.usuarios-cadastrados,
+.criar-post,
+.posts-publicados {
+    padding: 20px;
+
+    margin-top: 15px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* =================================
+   TÍTULOS INTERNOS
+================================= */
+
+.criar-usuario h3,
+.usuarios-cadastrados h3,
+.criar-post h3,
+.posts-publicados h3 {
+    font-size: 16px;
+
+    margin-bottom: 15px;
+
+    color: #475569;
+}
+
+
+/* =================================
+   SEÇÃO DE USUÁRIOS
+================================= */
+
+#usuarios-section {
+    border-top: 4px solid #6366f1;
+}
+
+
+/* =================================
+   SEÇÃO DE POSTS
+================================= */
+
+#posts-section {
+    border-top: 4px solid #8b5cf6;
+}
+
+/* =================================
+   PAINÉIS
+================================= */
+
+.painel {
+    background: white;
+
+    border-radius: 18px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.08);
+
+    overflow: hidden;
+}
+
+
+/* =================================
+   BOTÃO DO PAINEL
+================================= */
+
+.painel summary {
+    padding: 22px 25px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    list-style: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f8fafc
+        );
+
+    transition: 0.2s;
+}
+
+
+/* Remove a setinha padrão */
+
+.painel summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* Nossa própria seta */
+
+.painel summary::after {
+    content: "＋";
+
+    float: right;
+
+    font-size: 22px;
+
+    color: var(--primary);
+
+    transition: 0.2s;
+}
+
+
+/* Quando estiver aberto */
+
+.painel[open] summary::after {
+    content: "−";
+}
+
+
+/* Hover */
+
+.painel summary:hover {
+    background: #f8fafc;
+}
+
+
+/* =================================
+   CONTEÚDO
+================================= */
+
+.painel section {
+    margin: 0;
+
+    border: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    background: white;
+}
