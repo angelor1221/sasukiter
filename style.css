@@ -490,3 +490,105 @@ input[type="file"]::file-selector-button {
 
     background: white;
 }
+
+/* =================================
+   SISTEMA DE ABAS
+================================= */
+
+.tabs {
+    width: 100%;
+}
+
+
+/* Esconde os radio buttons */
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+
+/* =================================
+   BOTÕES
+================================= */
+
+.tabs label {
+    display: inline-block;
+
+    padding: 14px 30px;
+
+    margin-right: 10px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.tabs label:hover {
+    background: #eef2ff;
+}
+
+
+/* =================================
+   SEÇÕES
+================================= */
+
+.tabs section {
+    display: none;
+
+    margin-top: 25px;
+}
+
+
+/* =================================
+   MOSTRAR USUÁRIOS
+================================= */
+
+#tab-usuarios:checked ~ #usuarios-section {
+    display: block;
+}
+
+
+/* =================================
+   MOSTRAR POSTS
+================================= */
+
+#tab-posts:checked ~ #posts-section {
+    display: block;
+}
+
+
+/* =================================
+   BOTÃO ATIVO
+================================= */
+
+#tab-usuarios:checked + label {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color: white;
+}
+
+
+#tab-posts:checked + label {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color: white;
+}

@@ -11,142 +11,162 @@
     <!-- SEÇÃO DE USUÁRIOS -->
     <!-- ================================= -->
 
-    <details class="painel" open>
+    <div class="tabs">
 
-        <summary>
-            👤 Usuários
-        </summary>
+    <!-- ================================= -->
+    <!-- BOTÕES DE NAVEGAÇÃO -->
+    <!-- ================================= -->
 
-        <section id="usuarios-section">
+    <input
+        type="radio"
+        name="pagina"
+        id="tab-usuarios"
+        checked
+    >
 
-            <h2>Usuários</h2>
+    <label for="tab-usuarios">
+        👤 Usuários
+    </label>
 
-            <div class="criar-usuario">
 
-                <h3>Criar usuário</h3>
+    <input
+        type="radio"
+        name="pagina"
+        id="tab-posts"
+    >
 
-                <form id="formUsuario">
+    <label for="tab-posts">
+        📝 Posts
+    </label>
 
-                    <input
-                        id="nome"
-                        type="text"
-                        placeholder="Nome"
-                        required
-                    >
 
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                        required
-                    >
+    <!-- ================================= -->
+    <!-- SEÇÃO DE USUÁRIOS -->
+    <!-- ================================= -->
 
-                    <input
-                        id="senha"
-                        type="password"
-                        placeholder="Senha"
-                        required
-                    >
+    <section id="usuarios-section">
 
-                    <input
-                        id="cpf"
-                        type="text"
-                        placeholder="CPF"
-                        required
-                    >
+        <h2>Usuários</h2>
 
-                    <button type="submit">
-                        Cadastrar usuário
-                    </button>
+        <div class="criar-usuario">
 
-                </form>
+            <h3>Criar usuário</h3>
 
-            </div>
+            <form id="formUsuario">
 
-            <div class="usuarios-cadastrados">
+                <input
+                    id="nome"
+                    type="text"
+                    placeholder="Nome"
+                    required
+                >
 
-                <h3>Usuários cadastrados</h3>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    required
+                >
 
-                <div id="listaUsuarios"></div>
+                <input
+                    id="senha"
+                    type="password"
+                    placeholder="Senha"
+                    required
+                >
 
-            </div>
+                <input
+                    id="cpf"
+                    type="text"
+                    placeholder="CPF"
+                    required
+                >
 
-        </section>
+                <button type="submit">
+                    Cadastrar usuário
+                </button>
 
-    </details>
+            </form>
 
+        </div>
+
+
+        <div class="usuarios-cadastrados">
+
+            <h3>Usuários cadastrados</h3>
+
+            <div id="listaUsuarios"></div>
+
+        </div>
+
+    </section>
 
 
     <!-- ================================= -->
     <!-- SEÇÃO DE POSTS -->
     <!-- ================================= -->
 
-    <details class="painel">
+    <section id="posts-section">
 
-        <summary>
-            📝 Posts
-        </summary>
+        <h2>Posts</h2>
 
-        <section id="posts-section">
+        <div class="criar-post">
 
-            <h2>Posts</h2>
+            <h3>Criar post</h3>
 
-            <div class="criar-post">
+            <form id="formPost">
 
-                <h3>Criar post</h3>
+                <input
+                    id="titulo"
+                    type="text"
+                    placeholder="Título"
+                    required
+                >
 
-                <form id="formPost">
+                <textarea
+                    id="texto"
+                    placeholder="Texto"
+                    required
+                ></textarea>
 
-                    <input
-                        id="titulo"
-                        type="text"
-                        placeholder="Título"
-                        required
-                    >
+                <label for="imagem">
+                    Imagem (opcional)
+                </label>
 
-                    <textarea
-                        id="texto"
-                        placeholder="Texto"
-                        required
-                    ></textarea>
+                <input
+                    id="imagem"
+                    type="file"
+                    accept="image/*"
+                >
 
-                    <label for="imagem">
-                        Imagem (opcional)
-                    </label>
+                <select id="autor" required>
 
-                    <input
-                        id="imagem"
-                        type="file"
-                        accept="image/*"
-                    >
+                    <option value="">
+                        Selecione um autor
+                    </option>
 
-                    <select id="autor" required>
+                </select>
 
-                        <option value="">
-                            Selecione um autor
-                        </option>
+                <button type="submit">
+                    Criar post
+                </button>
 
-                    </select>
+            </form>
 
-                    <button type="submit">
-                        Criar post
-                    </button>
+        </div>
 
-                </form>
 
-            </div>
+        <div class="posts-publicados">
 
-            <div class="posts-publicados">
+            <h3>Posts publicados</h3>
 
-                <h3>Posts publicados</h3>
+            <div id="listaPosts"></div>
 
-                <div id="listaPosts"></div>
+        </div>
 
-            </div>
+    </section>
 
-        </section>
-
-    </details>
+</div>
     
     
     <!-- =============================== -->
