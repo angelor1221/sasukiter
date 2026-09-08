@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patreon</title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patreon</title> <link rel="stylesheet" href="style.css">
+    
+    </head> <body>
 
     <h1>Minha Rede Social</h1>
-
+   
 
 
     <!-- ================================= -->
@@ -21,121 +13,488 @@
 
     <div class="tabs">
 
-        <!-- ================================= -->
-        <!-- BOTÕES DE NAVEGAÇÃO -->
-        <!-- ================================= -->
+    <!-- ================================= -->
+    <!-- BOTÕES DE NAVEGAÇÃO -->
+    <!-- ================================= -->
 
-        <input type="radio" name="pagina" id="tab-usuarios" checked>
+    <input
+        type="radio"
+        name="pagina"
+        id="tab-usuarios"
+        checked
+    >
 
-        <label for="tab-usuarios">
-            👤 Usuários
-        </label>
-
-
-        <input type="radio" name="pagina" id="tab-posts">
-
-        <label for="tab-posts">
-            📝 Posts
-        </label>
+    <label for="tab-usuarios">
+        👤 Usuários
+    </label>
 
 
-        <!-- ================================= -->
-        <!-- SEÇÃO DE USUÁRIOS -->
-        <!-- ================================= -->
+    <input
+        type="radio"
+        name="pagina"
+        id="tab-posts"
+    >
 
-        <section id="usuarios-section">
-
-            <h2>Usuários</h2>
-
-            <div class="criar-usuario">
-
-                <h3>Criar usuário</h3>
-
-                <form id="formUsuario">
-
-                    <input id="nome" type="text" placeholder="Nome" required>
-
-                    <input id="email" type="email" placeholder="Email" required>
-
-                    <input id="senha" type="password" placeholder="Senha" required>
-
-                    <input id="cpf" type="text" placeholder="CPF" required>
-
-                    <button type="submit">
-                        Cadastrar usuário
-                    </button>
-
-                </form>
-
-            </div>
+    <label for="tab-posts">
+        📝 Posts
+    </label>
 
 
-            <div class="usuarios-cadastrados">
+    <!-- ================================= -->
+    <!-- SEÇÃO DE USUÁRIOS -->
+    <!-- ================================= -->
 
-                <h3>Usuários cadastrados</h3>
+    <section id="usuarios-section">
 
-                <div id="listaUsuarios"></div>
+        <h2>Usuários</h2>
 
-            </div>
+        <div class="criar-usuario">
 
-        </section>
+            <h3>Criar usuário</h3>
 
+            <form id="formUsuario">
 
-        <!-- ================================= -->
-        <!-- SEÇÃO DE POSTS -->
-        <!-- ================================= -->
+                <input
+                    id="nome"
+                    type="text"
+                    placeholder="Nome"
+                    required
+                >
 
-        <section id="posts-section">
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    required
+                >
 
-            <h2>Posts</h2>
+                <input
+                    id="senha"
+                    type="password"
+                    placeholder="Senha"
+                    required
+                >
 
-            <div class="criar-post">
+                <input
+                    id="cpf"
+                    type="text"
+                    placeholder="CPF"
+                    required
+                >
 
-                <h3>Criar post</h3>
+                <button type="submit">
+                    Cadastrar usuário
+                </button>
 
-                <form id="formPost">
+            </form>
 
-                    <input id="titulo" type="text" placeholder="Título" required>
-
-                    <textarea id="texto" placeholder="Texto" required></textarea>
-
-                    <label for="imagem">
-                        Imagem (opcional)
-                    </label>
-
-                    <input id="imagem" type="file" accept="image/*">
-
-                    <select id="autor" required>
-
-                        <option value="">
-                            Selecione um autor
-                        </option>
-
-                    </select>
-
-                    <button type="submit">
-                        Criar post
-                    </button>
-
-                </form>
-
-            </div>
+        </div>
 
 
-            <div class="posts-publicados">
+        <div class="usuarios-cadastrados">
 
-                <h3>Posts publicados</h3>
+            <h3>Usuários cadastrados</h3>
 
-                <div id="listaPosts"></div>
+            <div id="listaUsuarios"></div>
 
-            </div>
+        </div>
 
-        </section>
+    </section>
 
-    </div>
 
-    <script type="module" src="./app.js"></script>
+    <!-- ================================= -->
+    <!-- SEÇÃO DE POSTS -->
+    <!-- ================================= -->
 
-</body>
+    <section id="posts-section">
 
-</html>
+        <h2>Posts</h2>
+
+        <div class="criar-post">
+
+            <h3>Criar post</h3>
+
+            <form id="formPost">
+
+                <input
+                    id="titulo"
+                    type="text"
+                    placeholder="Título"
+                    required
+                >
+
+                <textarea
+                    id="texto"
+                    placeholder="Texto"
+                    required
+                ></textarea>
+
+                <label for="imagem">
+                    Imagem (opcional)
+                </label>
+
+                <input
+                    id="imagem"
+                    type="file"
+                    accept="image/*"
+                >
+
+                <select id="autor" required>
+
+                    <option value="">
+                        Selecione um autor
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Criar post
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="posts-publicados">
+
+            <h3>Posts publicados</h3>
+
+            <div id="listaPosts"></div>
+
+        </div>
+
+    </section>
+
+</div>
+    
+    
+    <!-- =============================== -->
+    <!-- JAVASCRIPT -->
+    <!-- =============================== -->
+    
+    <script type="module">
+    
+        import Servidor from "./Servidor.js";
+    
+    
+        // Criar o servidor
+        const servidor = new Servidor();
+    
+    
+        // =====================================
+        // CADASTRAR USUÁRIO
+        // =====================================
+    
+        const formUsuario =
+            document.getElementById("formUsuario");
+    
+    
+        formUsuario.addEventListener(
+            "submit",
+            function(event) {
+    
+                event.preventDefault();
+    
+    
+                const nome =
+                    document.getElementById("nome").value;
+    
+                const email =
+                    document.getElementById("email").value;
+    
+                const senha =
+                    document.getElementById("senha").value;
+    
+                const cpf =
+                    document.getElementById("cpf").value;
+    
+    
+                // Criar usuário através do servidor
+                const usuario =
+                    servidor.criarUsuario(
+                        nome,
+                        email,
+                        senha,
+                        cpf
+                    );
+    
+    
+                console.log(
+                    "Usuário criado:",
+                    usuario
+                );
+    
+    
+                console.log(
+                    "Todos os usuários:",
+                    servidor.usuarios
+                );
+    
+    
+                // Limpar formulário
+                formUsuario.reset();
+    
+    
+                // Atualizar lista
+                atualizarUsuarios();
+    
+    
+                alert(
+                    "Usuário " +
+                    usuario.nome +
+                    " cadastrado com sucesso!"
+                );
+    
+            }
+        );
+    
+    
+        // =====================================
+        // MOSTRAR USUÁRIOS
+        // =====================================
+    
+        function atualizarUsuarios() {
+    
+            const lista =
+                document.getElementById(
+                    "listaUsuarios"
+                );
+    
+    
+            // Limpar lista
+            lista.innerHTML = "";
+    
+    
+            // Limpar select de autores
+            const selectAutor =
+                document.getElementById("autor");
+    
+    
+            selectAutor.innerHTML =
+                '<option value="">Selecione um autor</option>';
+    
+    
+            // Percorrer usuários
+            servidor.usuarios.forEach(
+                function(usuario, index) {
+    
+    
+                    // Criar div do usuário
+                    const div =
+                        document.createElement("div");
+    
+    
+                    div.className = "usuario";
+    
+    
+                    div.innerHTML =
+                        "<strong>" +
+                        usuario.nome +
+                        "</strong><br>" +
+    
+                        "Email: " +
+                        usuario.email +
+                        "<br>" +
+    
+                        "CPF: " +
+                        usuario.cpf;
+    
+    
+                    lista.appendChild(div);
+    
+    
+                    // Criar opção no select
+                    const option =
+                        document.createElement("option");
+    
+    
+                    option.value = index;
+    
+    
+                    option.textContent =
+                        usuario.nome;
+    
+    
+                    selectAutor.appendChild(option);
+    
+                }
+            );
+    
+        }
+    
+    
+        // =====================================
+        // CRIAR POST
+        // =====================================
+    
+        const formPost =
+            document.getElementById("formPost");
+
+
+        formPost.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const titulo =
+                    document.getElementById("titulo").value;
+
+
+                const texto =
+                    document.getElementById("texto").value;
+
+
+                const autorIndex =
+                    document.getElementById("autor").value;
+
+
+                const arquivoImagem =
+                    document.getElementById("imagem").files[0];
+
+
+                if (autorIndex === "") {
+
+                    alert("Selecione um autor!");
+
+                    return;
+                }
+
+
+                const autor =
+                    servidor.usuarios[autorIndex];
+
+
+                // =====================================
+                // SEM IMAGEM
+                // =====================================
+
+                if (!arquivoImagem) {
+
+                    servidor.criarPost(
+                        titulo,
+                        texto,
+                        autor
+                    );
+
+                    formPost.reset();
+
+                    atualizarPosts();
+
+                    return;
+                }
+
+
+                // =====================================
+                // COM IMAGEM
+                // =====================================
+
+                const leitor =
+                    new FileReader();
+
+
+                leitor.onload = function(event) {
+
+                    const imagem =
+                        event.target.result;
+
+
+                    console.log("Imagem carregada!");
+                    console.log(imagem);
+
+
+                    servidor.criarPost(
+                        titulo,
+                        texto,
+                        autor,
+                        imagem
+                    );
+
+
+                    formPost.reset();
+
+                    atualizarPosts();
+
+                };
+
+
+                leitor.readAsDataURL(arquivoImagem);
+
+            }
+        );
+    
+        // =====================================
+        // MOSTRAR POSTS
+        // =====================================
+    
+        function atualizarPosts() {
+            const lista =
+                document.getElementById("listaPosts");
+
+
+            lista.innerHTML = "";
+
+
+            servidor.posts.forEach(
+                function(post) {
+
+                    const div =
+                        document.createElement("div");
+
+
+                    div.className = "post";
+
+
+                    let conteudoImagem = "";
+
+
+                    if (post.imagem) {
+
+                        conteudoImagem =
+                            `
+                            <img
+                                src="${post.imagem}"
+                                alt="Imagem do post"
+                                style="
+                                    width: 100%;
+                                    max-height: 500px;
+                                    object-fit: contain;
+                                    border-radius: 8px;
+                                    margin-top: 10px;
+                                "
+                            >
+                            `;
+                    }
+
+
+                    div.innerHTML =
+                        `
+                        <h3>
+                            ${post.titulo}
+                        </h3>
+
+                        <p>
+                            ${post.texto}
+                        </p>
+
+                        ${conteudoImagem}
+
+                        <p>
+                            <small>
+                                Autor: ${post.autor.nome}
+                            </small>
+                        </p>
+                        `;
+
+
+                    lista.appendChild(div);
+
+                }
+            );
+            }
+    
+    </script>
+    
+    </body> </html>
