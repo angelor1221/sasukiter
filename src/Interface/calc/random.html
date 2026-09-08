@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculadora de Ângelo</title>
+
+    <link rel="stylesheet" href="random.css">
+    <script src="../../Dominio/Calculadora.js"></script>
+    <script src="../../Servidor/Servicos/random.js"></script>
+    
+
+
+</head>
+
+<body>
+
+    <div style="margin-top: 30px;">
+        <input
+            class="input"
+            id="num1"
+            type="number"
+            placeholder="Digite o primeiro número"
+        >
+
+        <input
+            style="margin-left: 50px;"
+            class="input"
+            id="num2"
+            type="number"
+            placeholder="Digite o segundo número"
+        >
+    </div>
+
+    <div style="margin-top: 30px;">
+
+        <button
+            class="botao"
+            onclick="resultado.innerHTML = soma(num1.value, num2.value)">
+            Aperte para somar
+        </button>
+
+        <button
+            class="botao"
+            onclick="resultado.innerHTML = subtracao(num1.value, num2.value)">
+            Aperte para subtrair
+        </button>
+
+        <button
+            class="botao"
+            onclick="resultado.innerHTML = multiplica(num1.value, num2.value)">
+            Aperte para multiplicar
+        </button>
+
+        <button
+            class="botao"
+            onclick="resultado.innerHTML = divide(num1.value, num2.value)">
+            Aperte para dividir
+        </button>
+
+    </div>
+
+    <hr class="barra">
+
+    <p class="resultado" id="resultado">Resultado</p>
+
+</body>
+</html>
