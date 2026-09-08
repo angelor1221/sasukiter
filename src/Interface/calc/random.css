@@ -1,0 +1,43 @@
+.head {
+    color:rgb(255, 255, 255);
+    font-size: 50px;
+    font-family: monospace;
+    text-align:center;
+}
+body {
+    background-color: rgb(58, 52, 52);
+    padding: 300px;
+    text-align:center;
+    background-image:url("https://theplayoffs.news/wp-content/uploads/2024/12/USATSI_24928727_168414878_lowres.jpg");
+}
+
+.input {
+    border-radius: 20px;
+    border-color: black;
+    color:black;
+    padding-left: 9px;
+    height: 40px;
+}
+
+.divnum2 {
+    margin-left: 50px;
+    display: inline-block;
+}
+
+.botao {
+    height: 40px;
+    background-color: black;
+    color: aqua;
+    border-radius: 30px;
+    border-color: aqua;
+}
+
+.resultado {
+    color:white;
+    font-size: 30px;
+}
+
+.barra {
+    width: 600px;
+    color:black;
+}
