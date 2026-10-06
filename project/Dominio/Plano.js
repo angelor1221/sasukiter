@@ -1,11 +1,11 @@
 class Plano {
-    constructor(nome, descricao, preco, dono) {
+    constructor(nome, descricao, preco, autor) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.posts = [];
         this.assinantes = [];
-        this.dono = dono;
+        this.autor = autor;
     }
 
     trocaPreco(precoNovo) {

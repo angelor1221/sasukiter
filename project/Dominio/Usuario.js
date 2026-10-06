@@ -1,53 +1,34 @@
-export default class Usuario {
+class Usuario {
     constructor(nome, email, senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    deletarPost(post, fachada) {
-        if (!post || !fachada) {
+    deletarPost(post) {
+        if (!post) {
             return;
         }
 
-        // Remove o post da lista geral da Fachada
-        fachada.posts = fachada.posts.filter(
-            p => p !== post
-        );
-
         // Remove o post da lista do usuário que criou o post
-        if (post.dono && post.dono.posts) {
-            post.dono.posts = post.dono.posts.filter(
+        if (post.autor && post.autor.posts) {
+            post.autor.posts = post.autor.posts.filter(
                 p => p !== post
             );
         }
 
-        // Remove o post dos planos que o disponibilizavam
-        if (fachada.planos) {
-            fachada.planos.forEach(plano => {
-                if (plano.posts) {
-                    plano.posts = plano.posts.filter(
-                        p => p !== post
-                    );
-                }
-            });
-        }
     }
 
-    deletarPlano(plano, fachada) {
-        if (!plano || !fachada) {
+    deletarPlano(plano) {
+        if (!plano) {
             return;
         }
     
-        // Remove o plano da lista geral da Fachada
-        fachada.planos = fachada.planos.filter(
-            p => p !== plano
-        );
     
-        // Remove o plano da lista de planos criados pelo dono
-        if (plano.dono && plano.dono.planosCriados) {
-            plano.dono.planosCriados =
-                plano.dono.planosCriados.filter(
+        // Remove o plano da lista de planos criados pelo autor
+        if (plano.autor && plano.autor.planosCriados) {
+            plano.autor.planosCriados =
+                plano.autor.planosCriados.filter(
                     p => p !== plano
                 );
         }
@@ -68,51 +49,5 @@ export default class Usuario {
         plano.assinantes = [];
     }
 
-    deletarCliente(cliente, fachada) {
-        if (!cliente || !fachada) {
-            return;
-        }
-
-        // Remove o cliente da lista geral
-        fachada.clientes = fachada.clientes.filter(
-            c => c !== cliente
-        );
-
-        // Remove o login
-        if (fachada.logins) {
-            fachada.logins.delete(cliente.email);
-        }
-
-        // Remove os planos criados pelo cliente
-        if (cliente.planosCriados) {
-            cliente.planosCriados.forEach(plano => {
-                fachada.planos = fachada.planos.filter(
-                    p => p !== plano
-                );
-            });
-        }
-
-        // Remove os posts criados pelo cliente
-        if (cliente.posts) {
-            cliente.posts.forEach(post => {
-                fachada.posts = fachada.posts.filter(
-                    p => p !== post
-                );
-            });
-        }
-
-        // Remove o cliente dos assinantes dos planos
-        if (fachada.planos) {
-            fachada.planos.forEach(plano => {
-                if (plano.assinantes) {
-                    plano.assinantes =
-                        plano.assinantes.filter(
-                            c => c !== cliente
-                        );
-                }
-            });
-        }
-    }
-    
 }
 module.exports = Usuario;

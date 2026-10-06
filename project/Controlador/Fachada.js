@@ -39,7 +39,7 @@ class Fachada {
         return plano;
     }
 
-    criaPost(titulo, desc, preco, plano) {
+    criaPost(titulo, desc) {
         if (!this.conta) return null;
 
         const post = new Post(
@@ -47,9 +47,6 @@ class Fachada {
             desc,
             this.conta
         );
-        
-        plano.adicionaPost(post);
-        this.conta.posts.push(post);
 
         return post;
     }
@@ -65,7 +62,7 @@ class Fachada {
             this.conta &&
             this.conta.impulsionamento === impulsionamento
         ) {
-            this.conta.impulsionamento = null;
+            this.conta.impulsionamento  =  null;
         }
     }
 
@@ -79,6 +76,10 @@ class Fachada {
     }
 
     Registrar(nome, email, senha) {
+        if (this.logins.has(email)) {
+            return null;
+        }
+
         const cliente = new Cliente(nome, email, senha);
 
         this.clientes.push(cliente);
@@ -100,20 +101,76 @@ class Fachada {
     }
 
     DeletarPost(post) {
-        if (!this.conta) return;
+        if (!this.conta || this.conta !== post.autor) return;
 
-        this.conta.deletarPost(post, this);
+        this.conta.deletarPost(post);
+
+        // Remove o post dos planos que o disponibilizavam
+        if (this.planos) {
+            this.planos.forEach(plano => {
+                if (plano.posts) {
+                    plano.posts = plano.posts.filter(
+                        p => p !== post
+                    );
+                }
+            });
+        }
     }
 
     DeletarPlano(plano) {
-        if (!this.conta) return;
+        if (!this.conta || this.conta !== plano.autor) return;
 
-        this.conta.deletarPlano(plano, this);
+        this.conta.deletarPlano(plano);
+
+        // Remove o plano da lista geral da Fachada
+        this.planos = this.planos.filter(
+            p => p !== plano
+        );
     }
 
     RecarregarFeed(feed) {
-        if (!feed) return;
+        if (!this.conta) return;
 
-        feed.recarregaFeed();
+        this.conta.feed.recarregaFeed();
+    }
+
+
+    deletarCliente(cliente) {
+        if (!cliente || this.conta !== cliente) {
+            return;
+        }
+
+        // Remove o cliente da lista geral
+        this.clientes = this.clientes.filter(
+            c => c !== cliente
+        );
+
+        // Remove o login
+        if (this.logins) {
+            this.logins.delete(cliente.email);
+        }
+
+        // Remove os planos criados pelo cliente
+        if (cliente.planosCriados) {
+            cliente.planosCriados.forEach(plano => {
+                this.planos = this.planos.filter(
+                    p => p !== plano
+                );
+            });
+        }
+
+
+        // Remove o cliente dos assinantes dos planos
+        if (this.planos) {
+            this.planos.forEach(plano => {
+                if (plano.assinantes) {
+                    plano.assinantes =
+                        plano.assinantes.filter(
+                            c => c !== cliente
+                        );
+                }
+            });
+        }
     }
 }
+module.exports = Fachada;

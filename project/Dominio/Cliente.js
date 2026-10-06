@@ -1,6 +1,6 @@
 const Usuario = require("./Usuario");
 const Feed = require("./Feed");
-const Plano = require("./Plano");
+const Plano = require("./Plano");   
 
 
 class Cliente extends Usuario {
@@ -22,25 +22,10 @@ class Cliente extends Usuario {
         return plano;
     }
 
-    deletarPost(post) {
-        // Verifica se o post pertence a este cliente
-        if (this.posts.includes(post)) {
-            super.deletarPost(post);
-        }
+    adicionarPost(post){
+        this.posts.push(post);
     }
 
-    deletarPlano(plano) {
-        // Verifica se o plano foi criado por este cliente
-        if (this.planosCriados.includes(plano)) {
-            super.deletarPlano(plano);
-        }
-    }
 
-    deletarCliente(cliente) {
-        // Verifica se o cliente é o próprio cliente que chamou o método
-        if (this === cliente) {
-            super.deletarCliente(cliente);
-        }
-    }
 }
 module.exports = Cliente;

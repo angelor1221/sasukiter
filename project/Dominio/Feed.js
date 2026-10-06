@@ -4,13 +4,9 @@ class Feed {
         this.posts = [];
     }
 
-    recarregaFeed(fachada) {
-        if (!fachada || !fachada.conta) {
-            this.posts = [];
-            return;
-        }
-    
-        const planos = fachada.conta.planosAssinados || [];
+    recarregaFeed() {
+        
+        const planos = this.dono.planosAssinados || [];
     
         this.posts = [];
     
