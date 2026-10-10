@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>minhaRede — Conecte-se aos seus criadores</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Área exibida antes do login -->
+  <main
+    id="tela-autenticacao"
+    class="auth-shell"
+    aria-labelledby="titulo-autenticacao"
+  >
+    <header class="brand-header">
+      <p class="eyebrow">Criadores e suas comunidades</p>
+
+      <h1 id="titulo-autenticacao">
+        minhaRede<span>.</span>
+      </h1>
+
+      <p>
+        Um espaço para compartilhar suas ideias
+        e acompanhar quem inspira você.
+      </p>
+    </header>
+
+    <div class="auth-grid">
+      <article class="panel">
+        <h2>Bom ter você de volta</h2>
+
+        <p class="muted">
+          Entre para acessar seus planos e publicações.
+        </p>
+
+        <form id="form-login">
+          <fieldset disabled>
+            <legend class="sr-only">Entrar na conta</legend>
+
+            <label for="email-login">E-mail</label>
+            <input
+              id="email-login"
+              name="email"
+              type="email"
+              autocomplete="username"
+              required
+            >
+
+            <label for="senha-login">Senha</label>
+            <input
+              id="senha-login"
+              name="senha"
+              type="password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button type="submit" class="button-primary">
+              Entrar
+            </button>
+          </fieldset>
+        </form>
+      </article>
+
+      <article class="panel">
+        <h2>Sua comunidade começa aqui</h2>
+
+        <p class="muted">
+          Crie uma conta para publicar e descobrir criadores.
+        </p>
+
+        <form id="form-cadastro">
+          <fieldset disabled>
+            <legend class="sr-only">Criar uma conta</legend>
+
+            <label for="nome-cadastro">Nome</label>
+            <input
+              id="nome-cadastro"
+              name="nome"
+              type="text"
+              autocomplete="name"
+              required
+            >
+
+            <label for="email-cadastro">E-mail</label>
+            <input
+              id="email-cadastro"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            >
+
+            <label for="senha-cadastro">Senha</label>
+            <input
+              id="senha-cadastro"
+              name="senha"
+              type="password"
+              autocomplete="new-password"
+              required
+            >
+
+            <button type="submit" class="button-primary">
+              Criar conta
+            </button>
+          </fieldset>
+        </form>
+      </article>
+    </div>
+  </main>
+
+  <!-- Área que o controlador exibirá depois do login -->
+  <main id="tela-aplicacao" class="app-shell" hidden>
+    <header class="app-header">
+      <h1 class="brand">minhaRede<span>.</span></h1>
+
+      <div class="account-area">
+        <span id="nome-usuario"></span>
+
+        <button
+          id="botao-sair"
+          type="button"
+          class="button-secondary"
+          disabled
+        >
+          Sair
+        </button>
+      </div>
+    </header>
+
+    <nav class="navigation" aria-label="Áreas da plataforma">
+      <button
+        type="button"
+        data-tela="explorar"
+        class="active"
+        disabled
+      >
+        Explorar planos
+      </button>
+
+      <button type="button" data-tela="meu-espaco" disabled>
+        Meu espaço
+      </button>
+
+      <button type="button" data-tela="assinaturas" disabled>
+        Minhas assinaturas
+      </button>
+
+      <button type="button" data-tela="feed" disabled>
+        Meu feed
+      </button>
+    </nav>
+
+    <!-- Explorar e pesquisar planos -->
+    <section
+      id="tela-explorar"
+      class="workspace"
+      aria-labelledby="titulo-explorar"
+    >
+      <h2 id="titulo-explorar">
+        Encontre sua próxima inspiração
+      </h2>
+
+      <p class="muted">
+        Descubra os planos disponíveis e acompanhe seus criadores.
+      </p>
+
+      <form id="form-pesquisa" class="search-form">
+        <label class="sr-only" for="pesquisa">
+          Pesquisar planos
+        </label>
+
+        <input
+          id="pesquisa"
+          name="pesquisa"
+          type="search"
+          placeholder="Pesquisar planos"
+          disabled
+        >
+
+        <button type="submit" class="button-primary" disabled>
+          Pesquisar
+        </button>
+      </form>
+
+      <div id="lista-planos" class="cards-grid">
+        <p class="empty-state">
+          Os planos disponíveis aparecerão aqui.
+        </p>
+      </div>
+    </section>
+
+    <!-- Criar e consultar o próprio conteúdo -->
+    <section
+      id="tela-meu-espaco"
+      class="workspace"
+      aria-labelledby="titulo-meu-espaco"
+      hidden
+    >
+      <h2 id="titulo-meu-espaco">Seu espaço de criação</h2>
+
+      <p class="muted">
+        Organize seus planos e compartilhe novas publicações.
+      </p>
+
+      <div class="forms-grid">
+        <article class="panel">
+          <h3>Criar plano</h3>
+
+          <form id="form-plano">
+            <fieldset disabled>
+              <legend class="sr-only">
+                Dados do novo plano
+              </legend>
+
+              <label for="nome-plano">Nome do plano</label>
+              <input
+                id="nome-plano"
+                name="nome"
+                type="text"
+                required
+              >
+
+              <label for="descricao-plano">Descrição</label>
+              <textarea
+                id="descricao-plano"
+                name="descricao"
+                rows="3"
+                required
+              ></textarea>
+
+              <label for="preco-plano">Preço (R$)</label>
+              <input
+                id="preco-plano"
+                name="preco"
+                type="number"
+                step="0.01"
+                required
+              >
+
+              <button type="submit" class="button-primary">
+                Criar plano
+              </button>
+            </fieldset>
+          </form>
+        </article>
+
+        <article class="panel">
+          <h3>Publicar uma ideia</h3>
+
+          <form id="form-post">
+            <fieldset disabled>
+              <legend class="sr-only">
+                Dados da nova publicação
+              </legend>
+
+              <label for="titulo-post">Título</label>
+              <input
+                id="titulo-post"
+                name="titulo"
+                type="text"
+                required
+              >
+
+              <label for="texto-post">Texto</label>
+              <textarea
+                id="texto-post"
+                name="texto"
+                rows="5"
+                required
+              ></textarea>
+
+              <label for="plano-post">Plano (opcional)</label>
+
+              <select id="plano-post" name="plano">
+                <option value="">Sem vincular a um plano</option>
+              </select>
+
+              <button type="submit" class="button-primary">
+                Publicar
+              </button>
+            </fieldset>
+          </form>
+        </article>
+      </div>
+
+      <h3>Meus planos</h3>
+      <div id="lista-meus-planos" class="cards-grid">
+        <p class="empty-state">
+          Seus planos aparecerão aqui.
+        </p>
+      </div>
+
+      <h3>Minhas publicações</h3>
+      <div id="lista-meus-posts" class="cards-grid">
+        <p class="empty-state">
+          Suas publicações aparecerão aqui.
+        </p>
+      </div>
+    </section>
+
+    <!-- Consultar os planos assinados -->
+    <section
+      id="tela-assinaturas"
+      class="workspace"
+      aria-labelledby="titulo-assinaturas"
+      hidden
+    >
+      <h2 id="titulo-assinaturas">
+        Criadores que você acompanha
+      </h2>
+
+      <p class="muted">Veja os planos que você assinou.</p>
+
+      <div id="lista-assinaturas" class="cards-grid">
+        <p class="empty-state">
+          Suas assinaturas aparecerão aqui.
+        </p>
+      </div>
+    </section>
+
+    <!-- Consultar o feed disponível no domínio -->
+    <section
+      id="tela-feed"
+      class="workspace"
+      aria-labelledby="titulo-feed"
+      hidden
+    >
+      <div class="section-header">
+        <h2 id="titulo-feed">Novidades da sua comunidade</h2>
+
+        <button
+          id="botao-recarregar"
+          type="button"
+          class="button-secondary"
+          disabled
+        >
+          Atualizar feed
+        </button>
+      </div>
+
+      <p class="muted">
+        Publicações dos planos que você assinou, quando disponíveis.
+      </p>
+
+      <div id="lista-feed" class="cards-grid">
+        <p class="empty-state">
+          As publicações disponíveis aparecerão aqui.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Espaço para mensagens de sucesso ou erro -->
+  <p
+    id="mensagem"
+    class="status-message"
+    role="status"
+    aria-live="polite"
+  ></p>
+  <script type="module" src="../app.js"></script>
+</body>
+</html>
