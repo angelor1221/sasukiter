@@ -9,13 +9,17 @@ class Usuario {
         if (!post) {
             return;
         }
-
         // Remove o post da lista do usuário que criou o post
         if (post.autor && post.autor.posts) {
             post.autor.posts = post.autor.posts.filter(
                 p => p !== post
             );
         }
+
+        post.PlanosDisp.forEach(plano => {
+            plano.posts = plano.posts.filter(p => p !== post);
+        });
+        post.PlanosDisp = [];
 
     }
 

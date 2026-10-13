@@ -4,6 +4,7 @@ class Post {
         this.texto = texto;
         this.autor = autor;
         this.imagem = imagem;
+        this.PlanosDisp = [];
 
         autor.adicionarPost(this);
     }

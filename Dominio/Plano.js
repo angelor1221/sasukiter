@@ -17,7 +17,12 @@ class Plano {
             return;
         }
 
-        this.posts.push(post);
+        if (!this.posts.includes(post)) {
+            this.posts.push(post);
+        }
+        if (!post.PlanosDisp.includes(this)) {
+            post.PlanosDisp.push(this);
+        }
     }
 }
 
