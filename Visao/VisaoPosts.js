@@ -23,11 +23,28 @@ class VisaoPosts {
       const texto = document.createElement("p");
       texto.textContent = post.texto;
 
+      cartao.append(titulo, texto);
+
+      // Se o post tiver uma imagem salva, criamos a tag <img>
+      if (post.imagem) {
+        const imagemElemento = document.createElement("img");
+        imagemElemento.src = post.imagem;
+        imagemElemento.alt = post.titulo;
+        imagemElemento.style.width = "100%";
+        imagemElemento.style.maxHeight = "350px";
+        imagemElemento.style.objectFit = "cover";
+        imagemElemento.style.borderRadius = "8px";
+        imagemElemento.style.marginTop = "10px";
+        imagemElemento.style.marginBottom = "10px";
+        
+        cartao.append(imagemElemento);
+      }
+
       const autor = document.createElement("p");
       autor.className = "muted";
       autor.textContent = `Por ${post.autor.nome}`;
-
-      cartao.append(titulo, texto, autor);
+      
+      cartao.append(autor);
       lista.append(cartao);
     });
   }

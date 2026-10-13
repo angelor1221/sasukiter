@@ -10,7 +10,7 @@ class Plano {
 
     trocaPreco(precoNovo) {
         this.preco = precoNovo;
-    }
+    }   
 
     adicionaPost(post) {
         if (!post) {

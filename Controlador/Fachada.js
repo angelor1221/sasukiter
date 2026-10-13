@@ -39,13 +39,14 @@ class Fachada {
         return plano;
     }
 
-    criaPost(titulo, desc) {
+    criaPost(titulo, desc, imagem = null) {
         if (!this.conta) return null;
 
         const post = new Post(
             titulo,
             desc,
-            this.conta
+            this.conta,
+            imagem // Passando a imagem para a classe Post
         );
 
         return post;
@@ -69,10 +70,18 @@ class Fachada {
     pesquisar(pesquisa) {
         const termo = pesquisa.toLowerCase();
 
-        return this.planos.filter(plano =>
-            plano.nome.toLowerCase().includes(termo) ||
-            plano.descricao.toLowerCase().includes(termo)
-        );
+        return this.planos.filter(plano => {
+            // Verifica se o plano corresponde ao que foi digitado na busca
+            const atendeTermo = 
+                plano.nome.toLowerCase().includes(termo) ||
+                plano.descricao.toLowerCase().includes(termo);
+
+            // Garante que o plano NÃO pertence ao usuário logado no momento
+            const naoEhDoProprioUsuario = this.conta ? plano.autor !== this.conta : true;
+
+            // O plano só aparece se atender à busca E não for do próprio usuário
+            return atendeTermo && naoEhDoProprioUsuario;
+        });
     }
 
     Registrar(nome, email, senha) {
